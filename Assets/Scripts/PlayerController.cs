@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
     public int PlayerNum;
 
     public bool isProp;
+    public bool isFound;
+    public bool lockMovement;
+
+    public int points;
 
     public LayerMask mask;
 
@@ -41,49 +45,72 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Player movement
-        yaw += speedH * Input.GetAxis("Mouse X");
-        pitch -= speedV * Input.GetAxis("Mouse Y");
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!lockMovement)
         {
-            velocity.y = Mathf.Sqrt(JumpHight * -2 * gravity);
+            yaw += speedH * Input.GetAxis("Mouse X");
+            pitch -= speedV * Input.GetAxis("Mouse Y");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(JumpHight * -2 * gravity);
+            }
+
+            transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
+
+            isGrounded = controller.isGrounded;
+
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            controller.Move(move * Speed * Time.deltaTime + velocity * Time.deltaTime);
         }
-
-        transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
-
-        isGrounded = controller.isGrounded;
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * Speed * Time.deltaTime + velocity * Time.deltaTime);
-
 
         //Becoming a Prop
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (isProp && !lockMovement)
         {
-            RaycastHit hit;
-            Debug.DrawRay(gameObject.transform.position, transform.forward * 10, Color.green);
-            if (Physics.Raycast(gameObject.transform.position, transform.forward * 10, out hit, 10, mask))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                Debug.Log(hit.transform.name);
-                Vector3 hitPoiint;
-                hitPoiint = hit.point;
-                float dist = Vector3.Distance(gameObject.transform.position, hitPoiint);
-                mesh = hit.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
-                gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
-                gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+                RaycastHit hit;
+                Debug.DrawRay(gameObject.transform.position, transform.forward * 10, Color.green);
+                if (Physics.Raycast(gameObject.transform.position, transform.forward * 10, out hit, 10, mask))
+                {
+                    Debug.Log(hit.transform.name);
+                    points = hit.transform.gameObject.GetComponent<propFile>().points;
+                    mesh = hit.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
+                    gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
+                    gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+                }
+                else
+                {
+                    Debug.Log("miss");
+                }
             }
-            else
+        }else if (!isProp && !lockMovement)
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                Debug.Log("miss");
+                RaycastHit hit;
+                Debug.DrawRay(gameObject.transform.position, transform.forward * 10, Color.green);
+                if (Physics.Raycast(gameObject.transform.position, transform.forward * 10, out hit, 10, mask))
+                {
+                    Debug.Log(hit.transform.name);
+                    if(hit.transform.gameObject.tag == "Player")
+                    {
+                        hit.transform.gameObject.GetComponent<PlayerController>().isFound = true;
+                    }
+                    
+                }
+                else
+                {
+                    Debug.Log("miss");
+                }
             }
         }
     }
