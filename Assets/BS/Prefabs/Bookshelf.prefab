@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 2542815385110322108}
   - component: {fileID: 1505959894420362265}
   - component: {fileID: 3675722082609127635}
-  m_Layer: 0
+  - component: {fileID: 5714363671458763179}
+  - component: {fileID: 4878531217872920285}
+  m_Layer: 8
   m_Name: Bookshelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,3 +83,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5714363671458763179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882925751505928454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f66f0eb0ee8f2469113501f8bf0bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 15
+  groundHeight: -0.96
+  groundRadius: 0.5
+--- !u!64 &4878531217872920285
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882925751505928454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5371604993640696994, guid: 8e792424eb766ef4ab10441441527870, type: 3}

@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour
 
     public bool isProp;
     public bool isFound;
+    public bool noGuesses;
     public bool lockMovement;
 
     public int points;
+    public int guesses;
 
     public LayerMask mask;
+    public LayerMask mask2;
 
     Mesh mesh;
     Material m_Material;
@@ -57,9 +60,9 @@ public class PlayerController : MonoBehaviour
             }
 
             transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
-            if(pitch > 30f)
+            if(pitch > 40f)
             {
-                pitch = 30f;
+                pitch = 40f;
             }else if(pitch < -30f)
             {
                 pitch = -30f;
@@ -86,16 +89,17 @@ public class PlayerController : MonoBehaviour
             {
                 RaycastHit hit;
                 Debug.DrawRay(gameObject.transform.position, camera.transform.forward * 20, Color.green);
-                if (Physics.Raycast(gameObject.transform.position, camera.transform.forward * 20, out hit, 10, mask))
+                if (Physics.SphereCast(gameObject.transform.position, 2, camera.transform.forward * 20, out hit, 10, mask))
                 {
                     Debug.Log(hit.transform.name);
                     points = hit.transform.gameObject.GetComponent<propFile>().points;
-                    controller.center = new Vector3(0,hit.transform.gameObject.GetComponent<propFile>().groundHeight,0);
+                    controller.center = new Vector3(0,hit.transform.gameObject.GetComponent<propFile>().groundBoost, 0);
+                    controller.radius = hit.transform.gameObject.GetComponent<propFile>().groundRadius;
                     mesh = hit.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
-                    m_Material = hit.transform.gameObject.GetComponent<Renderer>().material;
+                    m_Material = hit.transform.gameObject.GetComponent<Renderer>().sharedMaterial;
                     gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
                     gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
-                    gameObject.GetComponent<Renderer>().material = m_Material;
+                    gameObject.GetComponent<Renderer>().sharedMaterial = m_Material;
                 }
                 else
                 {
@@ -104,21 +108,32 @@ public class PlayerController : MonoBehaviour
             }
         }else if (!isProp && !lockMovement)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+
+            if(guesses <= 0)
+            {
+                noGuesses = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 RaycastHit hit;
-                Debug.DrawRay(gameObject.transform.position, transform.forward * 10, Color.green);
-                if (Physics.Raycast(gameObject.transform.position, transform.forward * 10, out hit, 10, mask))
+                Debug.DrawRay(gameObject.transform.position, camera.transform.forward * 20, Color.green);
+                if (Physics.SphereCast(gameObject.transform.position, 2, camera.transform.forward * 20, out hit, 10, mask))
                 {
                     Debug.Log(hit.transform.name);
                     if(hit.transform.gameObject.tag == "Player")
                     {
                         hit.transform.gameObject.GetComponent<PlayerController>().isFound = true;
                     }
+                    else
+                    {
+                        guesses--;
+                    }
                     
                 }
                 else
                 {
+                    guesses--;
                     Debug.Log("miss");
                 }
             }

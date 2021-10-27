@@ -6,7 +6,9 @@ public class propFile : MonoBehaviour
 {
 
     public int points;
-    public float groundHeight;
+    public float groundBoost;
+    public float groundRadius;
+
 
     // Start is called before the first frame update
     void Start()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4590281282880818513}
   - component: {fileID: 584393818408960756}
   - component: {fileID: 3456750608103749182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BookOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -72,17 +72,28 @@ public class handleFile : MonoBehaviour
                 {
                     player1Prop();
                 }
+                if (Input.GetKeyDown("e"))
+                {
+                    timer = 0.1f;
+                }
                 break;
             case 2:
                 if (!spawnOnce)
                 {
                     player2Hunt();
                 }
-                if(player[0].GetComponent<PlayerController>().isFound == true)
+                textFields[6].text = "Guesses: " + player[1].GetComponent<PlayerController>().guesses;
+                if (player[0].GetComponent<PlayerController>().isFound == true)
                 {
                     player[0].GetComponent<PlayerController>().points = 0;
                     turn++;
                     spawnOnce = false;
+                    textFields[5].text = "Player 2 Caught player 1!";
+                }else if (player[1].GetComponent<PlayerController>().noGuesses == true)
+                {
+                    turn++;
+                    spawnOnce = false;
+                    textFields[5].text = "Player 2 ran out of guesses!";
                 }
                 break;
             case 3:
@@ -96,12 +107,17 @@ public class handleFile : MonoBehaviour
                 {
                     player2Prop();
                 }
+                if (Input.GetKeyDown("e"))
+                {
+                    timer = 0.1f;
+                }
                 break;
             case 5:
                 if (!spawnOnce)
                 {
                     player1Hunt();
                 }
+                textFields[6].text = "Guesses: " + player[0].GetComponent<PlayerController>().guesses;
                 if (player[1].GetComponent<PlayerController>().isFound == true)
                 {
                     player[1].GetComponent<PlayerController>().points = 0;
@@ -123,6 +139,8 @@ public class handleFile : MonoBehaviour
 
     void player1Prop()
     {
+        textFields[5].text = " ";
+        textFields[6].text = "";
         player[0] = Instantiate(playerPrefab, new Vector3(-1.149769f, -2.158f, 0.2496133f), Quaternion.identity);
         player[0].GetComponent<PlayerController>().isProp = true;
         player[0].GetComponent<PlayerController>().isFound = false;
@@ -144,6 +162,8 @@ public class handleFile : MonoBehaviour
 
     void player2Prop()
     {
+        textFields[5].text = " ";
+        textFields[6].text = "";
         player[1] = Instantiate(playerPrefab, new Vector3(-1.149769f, -2.158f, 0.2496133f), Quaternion.identity);
         player[1].GetComponent<PlayerController>().isProp = true;
         player[1].GetComponent<PlayerController>().isFound = false;
@@ -161,6 +181,7 @@ public class handleFile : MonoBehaviour
         timer = 90;
         spawnOnce = true;
         textFields[3].text = "Player 2 is hunting!";
+        textFields[6].text = "Guesses" + player[1].GetComponent<PlayerController>().guesses;
     }
 
 
