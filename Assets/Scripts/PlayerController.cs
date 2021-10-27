@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int PlayerNum;
+    public GameObject camera;
 
     public bool isProp;
     public bool isFound;
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask mask;
 
     Mesh mesh;
-    MeshCollider meshy;
+    Material m_Material;
 
 
     //player movement
@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         mesh = GetComponent<MeshFilter>().sharedMesh;
-        meshy = GetComponent<MeshCollider>();
         Cursor.visible = false;
         Screen.lockCursor =  true;
     }
@@ -58,6 +57,14 @@ public class PlayerController : MonoBehaviour
             }
 
             transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
+            if(pitch > 30f)
+            {
+                pitch = 30f;
+            }else if(pitch < -30f)
+            {
+                pitch = -30f;
+            }
+            camera.transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
             isGrounded = controller.isGrounded;
 
@@ -78,14 +85,17 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 RaycastHit hit;
-                Debug.DrawRay(gameObject.transform.position, transform.forward * 10, Color.green);
-                if (Physics.Raycast(gameObject.transform.position, transform.forward * 10, out hit, 10, mask))
+                Debug.DrawRay(gameObject.transform.position, camera.transform.forward * 20, Color.green);
+                if (Physics.Raycast(gameObject.transform.position, camera.transform.forward * 20, out hit, 10, mask))
                 {
                     Debug.Log(hit.transform.name);
                     points = hit.transform.gameObject.GetComponent<propFile>().points;
+                    controller.center = new Vector3(0,hit.transform.gameObject.GetComponent<propFile>().groundHeight,0);
                     mesh = hit.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
+                    m_Material = hit.transform.gameObject.GetComponent<Renderer>().material;
                     gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
                     gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+                    gameObject.GetComponent<Renderer>().material = m_Material;
                 }
                 else
                 {

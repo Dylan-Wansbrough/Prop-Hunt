@@ -299,7 +299,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fe940929472a8a6478955c1801381662, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 10
+  groundHeight: -0.4
 --- !u!1 &824627909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,8 +1010,8 @@ MonoBehaviour:
   points:
   - 0
   - 0
+  turn: 0
   round: 1
-  overallRound: 0
   timer: 0
   textFields:
   - {fileID: 912861552}
@@ -1254,6 +1255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 5
+  groundHeight: 0.2
 --- !u!1 &1788657617
 GameObject:
   m_ObjectHideFlags: 0

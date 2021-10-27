@@ -13,8 +13,8 @@ public class handleFile : MonoBehaviour
 
     public float[] points = new float[2];
 
+    public int turn;
     public int round;
-    public int overallRound;
 
     public float timer;
 
@@ -31,20 +31,28 @@ public class handleFile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        rounds();
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (round > 3)
         {
-            round++;
-            timer = 0;
-            spawnOnce = false;
-            if(player[2] != null)
-            {
-                Destroy(player[2]);
-            }
+            gameEnd();
         }
-        textThings();
+        else
+        {
+            rounds();
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                turn++;
+                timer = 0;
+                spawnOnce = false;
+                if (player[2] != null)
+                {
+                    Destroy(player[2]);
+                }
+            }
+            textThings();
+        }
+        
+       
     }
 
     void textThings()
@@ -52,12 +60,12 @@ public class handleFile : MonoBehaviour
         textFields[0].text = "Time left: " + timer;
         textFields[1].text = "Player 1: " + points[0];
         textFields[2].text = "player 2: " + points[1];
-        textFields[4].text = "Round: " + overallRound;
+        textFields[4].text = "Round: " + round;
     }
 
     void rounds()
     {
-        switch (round)
+        switch (turn)
         {
             case 1:
                 if (!spawnOnce)
@@ -73,7 +81,7 @@ public class handleFile : MonoBehaviour
                 if(player[0].GetComponent<PlayerController>().isFound == true)
                 {
                     player[0].GetComponent<PlayerController>().points = 0;
-                    round++;
+                    turn++;
                     spawnOnce = false;
                 }
                 break;
@@ -97,7 +105,7 @@ public class handleFile : MonoBehaviour
                 if (player[1].GetComponent<PlayerController>().isFound == true)
                 {
                     player[1].GetComponent<PlayerController>().points = 0;
-                    round++;
+                    turn++;
                     spawnOnce = false;
                 }
                 break;
@@ -188,7 +196,19 @@ public class handleFile : MonoBehaviour
         timer = 10;
         spawnOnce = true;
         textFields[3].text = "Get ready for the next round";
-        round = 0;
-        overallRound++;
+        turn = 0;
+        round++;
+    }
+
+    void gameEnd()
+    {
+        if(round != 5)
+        {
+            player[2] = Instantiate(cameraPrefab, new Vector3(0.05620193f, 17.62f, -0.9289341f), Quaternion.identity);
+            textFields[3].text = "And thats the game!";
+            textFields[4].text = "Round: " + 3;
+            textFields[0].text = "Time left: " + 0;
+        } 
+        round = 5;
     }
 }
