@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 584393818408960756}
   - component: {fileID: 3456750608103749182}
   m_Layer: 0
-  m_Name: Book
+  m_Name: BookOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3816840460954769387}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 715.15, y: 138.42241, z: -109.23}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
