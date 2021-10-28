@@ -17,6 +17,7 @@ public class handleFile : MonoBehaviour
     public int round;
 
     public float timer;
+    public float hintTimer;
 
     bool spawnOnce;
 
@@ -57,7 +58,7 @@ public class handleFile : MonoBehaviour
 
     void textThings()
     {
-        textFields[0].text = "Time left: " + timer;
+        textFields[0].text = "Time left: " + Mathf.Round(timer);
         textFields[1].text = "Player 1: " + points[0];
         textFields[2].text = "player 2: " + points[1];
         textFields[4].text = "Round: " + round;
@@ -82,6 +83,7 @@ public class handleFile : MonoBehaviour
                 {
                     player2Hunt();
                 }
+                hotAndColdSystem(0, 1);
                 textFields[6].text = "Guesses: " + player[1].GetComponent<PlayerController>().guesses;
                 if (player[0].GetComponent<PlayerController>().isFound == true)
                 {
@@ -117,6 +119,7 @@ public class handleFile : MonoBehaviour
                 {
                     player1Hunt();
                 }
+                hotAndColdSystem(1, 0);
                 textFields[6].text = "Guesses: " + player[0].GetComponent<PlayerController>().guesses;
                 if (player[1].GetComponent<PlayerController>().isFound == true)
                 {
@@ -147,6 +150,8 @@ public class handleFile : MonoBehaviour
         timer = 30;
         spawnOnce = true;
         textFields[3].text = "Player 1 hide!";
+        textFields[7].text = "";
+        textFields[8].text = "";
     }
 
     void player1Hunt()
@@ -158,6 +163,7 @@ public class handleFile : MonoBehaviour
         timer = 90;
         spawnOnce = true;
         textFields[3].text = "Player 1 is hunting!";
+        hintTimer = 10;
     }
 
     void player2Prop()
@@ -170,6 +176,8 @@ public class handleFile : MonoBehaviour
         timer = 30;
         spawnOnce = true;
         textFields[3].text = "Player 2 hide!";
+        textFields[7].text = "";
+        textFields[8].text = "";
     }
 
     void player2Hunt()
@@ -182,6 +190,7 @@ public class handleFile : MonoBehaviour
         spawnOnce = true;
         textFields[3].text = "Player 2 is hunting!";
         textFields[6].text = "Guesses" + player[1].GetComponent<PlayerController>().guesses;
+        hintTimer = 10;
     }
 
 
@@ -200,6 +209,8 @@ public class handleFile : MonoBehaviour
         timer = 10;
         spawnOnce = true;
         textFields[3].text = "Get ready for the next round";
+        textFields[7].text = "";
+        textFields[8].text = "";
     }
 
     void player2betweenRounds()
@@ -217,6 +228,8 @@ public class handleFile : MonoBehaviour
         timer = 10;
         spawnOnce = true;
         textFields[3].text = "Get ready for the next round";
+        textFields[7].text = "";
+        textFields[8].text = "";
         turn = 0;
         round++;
     }
@@ -231,5 +244,44 @@ public class handleFile : MonoBehaviour
             textFields[0].text = "Time left: " + 0;
         } 
         round = 5;
+    }
+
+    void hotAndColdSystem(int prop, int hunter)
+    {
+        hintTimer -= Time.deltaTime;
+        Vector3 propPos = player[prop].transform.position;
+        Vector3 hunterPos = player[hunter].transform.position;
+        
+        float dist = Vector3.Distance(propPos, hunterPos);
+        textFields[7].text = "next hint in: " + Mathf.Round(hintTimer) + " sec";
+        if (hintTimer < 0)
+        {
+            if (dist < 15)
+            {
+                textFields[8].text = "Very Hot";
+            }
+            else if (dist < 25)
+            {
+                textFields[8].text = "Hot";
+            }
+            else if (dist < 40)
+            {
+                textFields[8].text = "Warm";
+            }
+            else if (dist < 60)
+            {
+                textFields[8].text = "Cold";
+            }
+            else if (dist < 80)
+            {
+                textFields[8].text = "Very Cold";
+            }
+            else
+            {
+                textFields[8].text = "Freezing";
+            }
+            hintTimer = 10;
+        }
+        
     }
 }
