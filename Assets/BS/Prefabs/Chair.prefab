@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6241977652702990980}
   - component: {fileID: 8177132655416518222}
   - component: {fileID: 3672056547226501184}
-  m_Layer: 0
+  - component: {fileID: 6964006634860835854}
+  m_Layer: 8
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +97,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6264831526926562434, guid: f9e14aed55855274ca1efad6f51695b4, type: 3}
+--- !u!114 &6964006634860835854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673006367564007323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f66f0eb0ee8f2469113501f8bf0bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 7
+  groundBoost: -0.25
+  groundRadius: 0.5

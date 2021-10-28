@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
                     points = hit.transform.gameObject.GetComponent<propFile>().points;
                     controller.center = new Vector3(0,hit.transform.gameObject.GetComponent<propFile>().groundBoost, 0);
                     controller.radius = hit.transform.gameObject.GetComponent<propFile>().groundRadius;
+                    controller.height = hit.transform.gameObject.GetComponent<propFile>().groundHeight;
                     mesh = hit.transform.gameObject.GetComponent<MeshFilter>().sharedMesh;
                     m_Material = hit.transform.gameObject.GetComponent<Renderer>().sharedMaterial;
                     gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
