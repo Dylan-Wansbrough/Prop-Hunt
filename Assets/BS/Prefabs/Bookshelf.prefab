@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4856269053888043818}
   - component: {fileID: 7241816446541033440}
   - component: {fileID: 9217125710298998717}
-  m_Layer: 0
+  - component: {fileID: 6809617506934236331}
+  m_Layer: 8
   m_Name: Bookshelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +97,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5371604993640696994, guid: 8e792424eb766ef4ab10441441527870, type: 3}
+--- !u!114 &6809617506934236331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9187595853941394997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f66f0eb0ee8f2469113501f8bf0bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 15
+  groundBoost: -0.7
+  groundRadius: 0.75
+  groundHeight: 1

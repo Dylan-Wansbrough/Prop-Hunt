@@ -163,7 +163,7 @@ public class handleFile : MonoBehaviour
         timer = 90;
         spawnOnce = true;
         textFields[3].text = "Player 1 is hunting!";
-        hintTimer = 10;
+        hintTimer = 0;
     }
 
     void player2Prop()
@@ -190,7 +190,7 @@ public class handleFile : MonoBehaviour
         spawnOnce = true;
         textFields[3].text = "Player 2 is hunting!";
         textFields[6].text = "Guesses" + player[1].GetComponent<PlayerController>().guesses;
-        hintTimer = 10;
+        hintTimer = 0;
     }
 
 
