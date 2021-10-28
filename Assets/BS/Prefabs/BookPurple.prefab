@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7058926810063953085}
   - component: {fileID: 6222148524916134680}
   - component: {fileID: 8195834801501513682}
-  - component: {fileID: 4010708690051999858}
+  - component: {fileID: 1360712701936339671}
   m_Layer: 0
-  m_Name: BookBlack
+  m_Name: BookPurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9c052793978f1b428e2e8f5abb22bab, type: 2}
+  - {fileID: 2100000, guid: bb0c9a7df6cc6ce4999ef5d0d3fb54c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4010708690051999858
+--- !u!65 &1360712701936339671
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
