@@ -127,6 +127,12 @@ public class handleFile : MonoBehaviour
                     turn++;
                     spawnOnce = false;
                 }
+                else if (player[0].GetComponent<PlayerController>().noGuesses == true)
+                {
+                    turn++;
+                    spawnOnce = false;
+                    textFields[5].text = "Player 1 ran out of guesses!";
+                }
                 break;
             case 6:
                 if (!spawnOnce)
@@ -196,7 +202,7 @@ public class handleFile : MonoBehaviour
 
     void player1betweenRounds()
     {
-        player[2] = Instantiate(cameraPrefab, new Vector3(0.05620193f, 17.62f, -0.9289341f), Quaternion.identity);
+        player[2] = Instantiate(cameraPrefab, new Vector3(-9.45f, -3.7f, -24.88f), Quaternion.identity);
         //points
         if (player[0] != null)
         {
@@ -215,7 +221,7 @@ public class handleFile : MonoBehaviour
 
     void player2betweenRounds()
     {
-        player[2] = Instantiate(cameraPrefab, new Vector3(0.05620193f, 17.62f, -0.9289341f), Quaternion.identity);
+        player[2] = Instantiate(cameraPrefab, new Vector3(-9.45f, -3.7f, -24.88f), Quaternion.identity);
         //points
         if (player[1] != null)
         {
@@ -238,7 +244,7 @@ public class handleFile : MonoBehaviour
     {
         if(round != 5)
         {
-            player[2] = Instantiate(cameraPrefab, new Vector3(0.05620193f, 17.62f, -0.9289341f), Quaternion.identity);
+            player[2] = Instantiate(cameraPrefab, new Vector3(-9.45f, -3.7f, -24.88f), Quaternion.identity);
             textFields[3].text = "And thats the game!";
             textFields[4].text = "Round: " + 3;
             textFields[0].text = "Time left: " + 0;
