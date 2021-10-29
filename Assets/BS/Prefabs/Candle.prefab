@@ -110,6 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 2
-  groundBoost: -0.1
+  groundBoost: 0.1
   groundRadius: 0.05
   groundHeight: 0.3

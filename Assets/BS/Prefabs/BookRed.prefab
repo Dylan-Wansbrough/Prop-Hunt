@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6222148524916134680}
   - component: {fileID: 8195834801501513682}
   - component: {fileID: 8820385556383052867}
-  m_Layer: 0
+  - component: {fileID: 2695190849480635678}
+  m_Layer: 8
   m_Name: BookRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,3 +96,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.42570487, y: 0.5577788, z: 0.10929199}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2695190849480635678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691453427555468807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f66f0eb0ee8f2469113501f8bf0bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 4
+  groundBoost: 0.05
+  groundRadius: 0.2
+  groundHeight: 0.5
